@@ -11,6 +11,9 @@ import numpy as np
 from nav_msgs.msg import OccupancyGrid
 
 
+DEFAULT_FOG_REPO = Path(__file__).resolve().parents[2] / "lidar_fog_sim"
+
+
 WEATHER_PRESETS = {
     "clear": {"alpha": 0.0, "friction": 0.80, "noise_std": 0.00, "drop_scale": 0.00, "false_rate": 0.000},
     "mist": {"alpha": 0.005, "friction": 0.70, "noise_std": 0.01, "drop_scale": 0.15, "false_rate": 0.002},
@@ -39,7 +42,7 @@ class WeatherConfig:
     noise_variant: str = "v4"
     max_points: int = 60000
     publish_raw: bool = True
-    fog_repo: str = "/home/yuan/WeatherGuard-Go2/LiDAR_fog_sim"
+    fog_repo: str = str(DEFAULT_FOG_REPO)
 
     @classmethod
     def from_cfg(cls, cfg) -> "WeatherConfig":
@@ -55,7 +58,7 @@ class WeatherConfig:
             noise_variant=str(getattr(weather, "noise_variant", "v4")),
             max_points=int(getattr(weather, "max_points", 60000)),
             publish_raw=bool(getattr(weather, "publish_raw", True)),
-            fog_repo=str(getattr(weather, "fog_repo", "/home/yuan/WeatherGuard-Go2/LiDAR_fog_sim")),
+            fog_repo=str(getattr(weather, "fog_repo", DEFAULT_FOG_REPO)),
         )
 
     @property

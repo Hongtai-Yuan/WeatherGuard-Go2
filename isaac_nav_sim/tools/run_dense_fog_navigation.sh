@@ -1,8 +1,8 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-REPO=/home/yuan/WeatherGuard-Go2/Go2_Isaac_ros2
-PY=/home/yuan/anaconda3/envs/env_isaaclab/bin/python
+REPO="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
+PY=${PYTHON:-/home/yuan/anaconda3/envs/env_isaaclab/bin/python}
 
 cd "$REPO"
 if [ -f /opt/ros/humble/setup.bash ]; then

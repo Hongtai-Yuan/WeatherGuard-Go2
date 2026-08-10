@@ -1,0 +1,22 @@
+# Local source checkouts kept for development. The curated project modules are
+# tracked at the repository root under semantic names.
+/Go2-Low-Friction-Locomotion-Benchmark/
+/Go2_Isaac_ros2/
+/LiDAR_fog_sim/
+/unitree_rl_mjlab/
+
+# Runtime and training artifacts.
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+wandb/
+logs/
+outputs/
+tmp/
+
+# Large generated model/checkpoint artifacts.
+*.pt
+*.pth
+*.ckpt

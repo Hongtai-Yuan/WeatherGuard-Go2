@@ -9,8 +9,8 @@ robot: go2 # go2, spot
 
 locomotion:
   controller: mujoco_onnx # mujoco_onnx, rsl_flat
-  policy: /home/yuan/WeatherGuard-Go2/unitree_rl_mjlab/logs/rsl_rl/go2_velocity/2026-08-09_23-20-22/policy.onnx
-  sysid_params_json: outputs/sysid_fast_phase/isaac_sysid_new_trained_policy.json
+  policy: ckpts/unitree_go2/mujoco_slippery_policy.onnx
+  sysid_params_json: null
   ground_friction: 0.6
   policy_command_scale: 1.0
   policy_phase_period: 0.30
@@ -39,7 +39,7 @@ weather:
   intensity: 120.0
   max_points: 60000
   publish_raw: True
-  fog_repo: /home/yuan/WeatherGuard-Go2/LiDAR_fog_sim
+  fog_repo: ../lidar_fog_sim
 
 sim_app:
   anti_aliasing: 0

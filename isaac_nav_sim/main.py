@@ -84,7 +84,9 @@ def main(cfg):
         go2_ctrl.init_base_vel_cmd(cfg.num_envs)
         if controller == "mujoco_onnx":
             policy_path = to_absolute_path(cfg.locomotion.policy)
-            sysid_params_json = to_absolute_path(cfg.locomotion.sysid_params_json)
+            sysid_params_json = None
+            if getattr(cfg.locomotion, "sysid_params_json", None):
+                sysid_params_json = to_absolute_path(cfg.locomotion.sysid_params_json)
             weather_cfg = WeatherConfig.from_cfg(cfg)
             ground_friction = cfg.locomotion.ground_friction
             if weather_cfg.enabled:
