@@ -1,0 +1,376 @@
+--- git commit ---
+1f92312c97f22fc107c5d067ebec3e908008687a
+
+
+--- git status ---
+On branch main
+Your branch is up to date with 'origin/main'.
+
+Changes not staged for commit:
+  (use "git add <file>..." to update what will be committed)
+  (use "git restore <file>..." to discard changes in working directory)
+	modified:   scripts/play.py
+	modified:   scripts/train.py
+	modified:   src/tasks/velocity/config/a2/env_cfgs.py
+	modified:   src/tasks/velocity/config/g1/env_cfgs.py
+	modified:   src/tasks/velocity/config/g1_23dof/env_cfgs.py
+	modified:   src/tasks/velocity/config/go2/__init__.py
+	modified:   src/tasks/velocity/config/go2/env_cfgs.py
+	modified:   src/tasks/velocity/config/h1_2/env_cfgs.py
+	modified:   src/tasks/velocity/config/r1/env_cfgs.py
+	modified:   src/tasks/velocity/mdp/velocity_command.py
+	modified:   src/tasks/velocity/velocity_env_cfg.py
+
+Untracked files:
+  (use "git add <file>..." to include in what will be committed)
+	scripts/analyze_and_plot_eval.py
+	scripts/analyze_eval_log.txt
+	scripts/comprehensive_plot.py
+	scripts/eval_fixed_cmd.py
+	"scripts/eval_fixed_cmd\344\273\213\347\273\215.txt"
+	src/__pycache__/
+	src/assets/__pycache__/
+	src/assets/robots/__pycache__/
+	src/assets/robots/unitree_a2/__pycache__/
+	src/assets/robots/unitree_g1/__pycache__/
+	src/assets/robots/unitree_go2/__pycache__/
+	src/assets/robots/unitree_h1_2/__pycache__/
+	src/assets/robots/unitree_r1/__pycache__/
+	src/tasks/__pycache__/
+	src/tasks/tracking/__pycache__/
+	src/tasks/tracking/config/__pycache__/
+	src/tasks/tracking/config/g1/__pycache__/
+	src/tasks/tracking/mdp/__pycache__/
+	src/tasks/tracking/rl/__pycache__/
+	src/tasks/velocity/__pycache__/
+	src/tasks/velocity/config/__pycache__/
+	src/tasks/velocity/config/a2/__pycache__/
+	src/tasks/velocity/config/g1/__pycache__/
+	src/tasks/velocity/config/g1_23dof/__pycache__/
+	src/tasks/velocity/config/go2/__pycache__/
+	src/tasks/velocity/config/h1_2/__pycache__/
+	src/tasks/velocity/config/r1/__pycache__/
+	src/tasks/velocity/mdp/__pycache__/
+	src/tasks/velocity/rl/__pycache__/
+	tmp/
+	"velocity_env_cfg\347\220\206\350\247\243.txt"
+	"\346\200\273\344\275\223\347\216\257\345\242\203\347\220\206\350\247\243.txt"
+
+no changes added to commit (use "git add" and/or "git commit -a") 
+
+
+--- git diff ---
+diff --git a/scripts/play.py b/scripts/play.py
+index 98f45fc..8b40f23 100644
+--- a/scripts/play.py
++++ b/scripts/play.py
+@@ -208,3 +208,7 @@ def main():
+ 
+ if __name__ == "__main__":
+   main()
++#python scripts/play.py Unitree-Go2-Flat --checkpoint-file logs/rsl_rl/go2_velocity/baseline_logs/model_4000.pt
++#python scripts/play.py Unitree-Go2-Slippery --checkpoint-file logs/rsl_rl/go2_velocity/slippery/model_4000.pt
++#python scripts/play.py Unitree-Go2-Flat --checkpoint-file logs/rsl_rl/go2_velocity/slippery/model_4000.pt
++#python scripts/play.py Unitree-Go2-Slippery --checkpoint-file logs/rsl_rl/go2_velocity/baseline_logs/model_4000.pt
+\ No newline at end of file
+diff --git a/scripts/train.py b/scripts/train.py
+index f727e28..a277129 100644
+--- a/scripts/train.py
++++ b/scripts/train.py
+@@ -220,3 +220,11 @@ def main():
+ 
+ if __name__ == "__main__":
+   main()
++#cd ~/unitree_rl_mjlab
++#code .
++"""
++CUDA_VISIBLE_DEVICES=0 python scripts/train.py Unitree-Go2-Slippery-Train \
++  --agent.run_name slippery_train_v1 \
++  --env.scene.num_envs 256 \
++  --agent.max_iterations 6000
++"""
+\ No newline at end of file
+diff --git a/src/tasks/velocity/config/a2/env_cfgs.py b/src/tasks/velocity/config/a2/env_cfgs.py
+index e1bea80..c738b0c 100644
+--- a/src/tasks/velocity/config/a2/env_cfgs.py
++++ b/src/tasks/velocity/config/a2/env_cfgs.py
+@@ -12,7 +12,8 @@ from mjlab.managers import TerminationTermCfg
+ from mjlab.managers.event_manager import EventTermCfg
+ from mjlab.sensor import ContactMatch, ContactSensorCfg, RayCastSensorCfg
+ from mjlab.tasks.velocity import mdp
+-from mjlab.tasks.velocity.mdp import UniformVelocityCommandCfg
++#from mjlab.tasks.velocity.mdp import UniformVelocityCommandCfg   #库里原始版本
++from src.tasks.velocity.mdp import UniformVelocityCommandCfg    #你自己改过的版本
+ 
+ from src.tasks.velocity.velocity_env_cfg import make_velocity_env_cfg
+ 
+diff --git a/src/tasks/velocity/config/g1/env_cfgs.py b/src/tasks/velocity/config/g1/env_cfgs.py
+index 3bd4c6b..efd867d 100644
+--- a/src/tasks/velocity/config/g1/env_cfgs.py
++++ b/src/tasks/velocity/config/g1/env_cfgs.py
+@@ -11,10 +11,13 @@ from mjlab.managers.event_manager import EventTermCfg
+ from mjlab.managers.reward_manager import RewardTermCfg
+ from mjlab.sensor import ContactMatch, ContactSensorCfg, RayCastSensorCfg
+ from mjlab.tasks.velocity import mdp
+-from mjlab.tasks.velocity.mdp import UniformVelocityCommandCfg
++#from mjlab.tasks.velocity.mdp import UniformVelocityCommandCfg   #库里原始版本
++from src.tasks.velocity.mdp import UniformVelocityCommandCfg    #你自己改过的版本
++
+ from src.tasks.velocity.velocity_env_cfg import make_velocity_env_cfg
+ 
+ 
++
+ def unitree_g1_rough_env_cfg(play: bool = False) -> ManagerBasedRlEnvCfg:
+   """Create Unitree G1 rough terrain velocity configuration."""
+   cfg = make_velocity_env_cfg()
+diff --git a/src/tasks/velocity/config/g1_23dof/env_cfgs.py b/src/tasks/velocity/config/g1_23dof/env_cfgs.py
+index d9354e2..7cc8e5b 100644
+--- a/src/tasks/velocity/config/g1_23dof/env_cfgs.py
++++ b/src/tasks/velocity/config/g1_23dof/env_cfgs.py
+@@ -11,7 +11,9 @@ from mjlab.managers.event_manager import EventTermCfg
+ from mjlab.managers.reward_manager import RewardTermCfg
+ from mjlab.sensor import ContactMatch, ContactSensorCfg, RayCastSensorCfg
+ from mjlab.tasks.velocity import mdp
+-from mjlab.tasks.velocity.mdp import UniformVelocityCommandCfg
++
++#from mjlab.tasks.velocity.mdp import UniformVelocityCommandCfg   #库里原始版本
++from src.tasks.velocity.mdp import UniformVelocityCommandCfg    #你自己改过的版本
+ from src.tasks.velocity.velocity_env_cfg import make_velocity_env_cfg
+ 
+ 
+diff --git a/src/tasks/velocity/config/go2/__init__.py b/src/tasks/velocity/config/go2/__init__.py
+index eb71613..182f6b9 100644
+--- a/src/tasks/velocity/config/go2/__init__.py
++++ b/src/tasks/velocity/config/go2/__init__.py
+@@ -4,6 +4,8 @@ from src.tasks.velocity.rl import VelocityOnPolicyRunner
+ from .env_cfgs import (
+   unitree_go2_flat_env_cfg,
+   unitree_go2_rough_env_cfg,
++  unitree_go2_slippery_env_cfg,## 把新加的 slippery 环境函数也导进来，后面才能注册成 task。
++  unitree_go2_slippery_train_env_cfg,#用于训练
+ )
+ from .rl_cfg import unitree_go2_ppo_runner_cfg
+ 
+@@ -22,3 +24,20 @@ register_mjlab_task(
+   rl_cfg=unitree_go2_ppo_runner_cfg(),
+   runner_cls=VelocityOnPolicyRunner,
+ )
++
++register_mjlab_task(   
++    # 注册一个新的 task 名字，后面训练和评测时就可以直接用 Unitree-Go2-Slippery。
++  task_id="Unitree-Go2-Slippery",
++  env_cfg=unitree_go2_slippery_env_cfg(),
++  play_env_cfg=unitree_go2_slippery_env_cfg(play=True),
++  rl_cfg=unitree_go2_ppo_runner_cfg(),
++  runner_cls=VelocityOnPolicyRunner,
++)
++
++register_mjlab_task(
++  task_id="Unitree-Go2-Slippery-Train",
++  env_cfg=unitree_go2_slippery_train_env_cfg(),
++  play_env_cfg=unitree_go2_slippery_train_env_cfg(play=True),
++  rl_cfg=unitree_go2_ppo_runner_cfg(),
++  runner_cls=VelocityOnPolicyRunner,
++)
+\ No newline at end of file
+diff --git a/src/tasks/velocity/config/go2/env_cfgs.py b/src/tasks/velocity/config/go2/env_cfgs.py
+index 244d72d..94c72e7 100644
+--- a/src/tasks/velocity/config/go2/env_cfgs.py
++++ b/src/tasks/velocity/config/go2/env_cfgs.py
+@@ -12,7 +12,10 @@ from mjlab.managers import TerminationTermCfg
+ from mjlab.managers.event_manager import EventTermCfg
+ from mjlab.sensor import ContactMatch, ContactSensorCfg, RayCastSensorCfg
+ from mjlab.tasks.velocity import mdp
+-from mjlab.tasks.velocity.mdp import UniformVelocityCommandCfg
++
++
++#from mjlab.tasks.velocity.mdp import UniformVelocityCommandCfg   #库里原始版本
++from src.tasks.velocity.mdp import UniformVelocityCommandCfg    #你自己改过的版本
+ 
+ from src.tasks.velocity.velocity_env_cfg import make_velocity_env_cfg
+ 
+@@ -165,6 +168,35 @@ def unitree_go2_flat_env_cfg(play: bool = False) -> ManagerBasedRlEnvCfg:
+     assert isinstance(twist_cmd, UniformVelocityCommandCfg)
+     twist_cmd.ranges.lin_vel_x = (-0.5, 1.0)
+     twist_cmd.ranges.lin_vel_y = (-0.5, 0.5)
+-    twist_cmd.ranges.ang_vel_z = (-0.5, 0.5)
++    
++  return cfg
++
++def unitree_go2_slippery_env_cfg(play: bool = False) -> ManagerBasedRlEnvCfg:
++  """Create Unitree Go2 slippery flat terrain velocity configuration."""
++  # 先直接复用 flat 环境，保证任务结构、观测、奖励、动作都不变。
++  cfg = unitree_go2_flat_env_cfg(play=play)
++
++  # 这里后面专门放“slippery 地面”的最小修改。
++  # 先只建立函数壳子，方便下一步继续加摩擦设置。
++
++  cfg.events["foot_friction"].params["ranges"] = (0.2, 0.2)
++
++   # 调试打印：确认 slippery 环境里实际使用的摩擦范围。
++  print("[DEBUG] slippery foot_friction ranges:", cfg.events["foot_friction"].params["ranges"])
+ 
+   return cfg
++
++def unitree_go2_slippery_train_env_cfg(play: bool = False) -> ManagerBasedRlEnvCfg:
++  """Create Unitree Go2 low-friction training configuration."""
++  # 先复用 flat 环境，保持任务结构不变。
++  cfg = unitree_go2_flat_env_cfg(play=play)
++
++  # 训练时使用低摩擦范围，而不是固定单点摩擦。
++  # 这样策略会在一小段 slippery 分布里学到更稳的行为。
++  cfg.events["foot_friction"].params["ranges"] = (0.1, 1.0)
++
++  
++  # 调试打印：确认训练环境里实际使用的脚部摩擦范围。
++  print("[DEBUG] slippery-train foot_friction ranges:", cfg.events["foot_friction"].params["ranges"])
++
++  return cfg
+\ No newline at end of file
+diff --git a/src/tasks/velocity/config/h1_2/env_cfgs.py b/src/tasks/velocity/config/h1_2/env_cfgs.py
+index 6cfd160..5552a04 100644
+--- a/src/tasks/velocity/config/h1_2/env_cfgs.py
++++ b/src/tasks/velocity/config/h1_2/env_cfgs.py
+@@ -11,7 +11,8 @@ from mjlab.managers.event_manager import EventTermCfg
+ from mjlab.managers.reward_manager import RewardTermCfg
+ from mjlab.sensor import ContactMatch, ContactSensorCfg, RayCastSensorCfg
+ from mjlab.tasks.velocity import mdp
+-from mjlab.tasks.velocity.mdp import UniformVelocityCommandCfg
++#from mjlab.tasks.velocity.mdp import UniformVelocityCommandCfg   #库里原始版本
++from src.tasks.velocity.mdp import UniformVelocityCommandCfg    #你自己改过的版本
+ from src.tasks.velocity.velocity_env_cfg import make_velocity_env_cfg
+ 
+ 
+diff --git a/src/tasks/velocity/config/r1/env_cfgs.py b/src/tasks/velocity/config/r1/env_cfgs.py
+index cc98e5e..863866e 100644
+--- a/src/tasks/velocity/config/r1/env_cfgs.py
++++ b/src/tasks/velocity/config/r1/env_cfgs.py
+@@ -11,7 +11,9 @@ from mjlab.managers.event_manager import EventTermCfg
+ from mjlab.managers.reward_manager import RewardTermCfg
+ from mjlab.sensor import ContactMatch, ContactSensorCfg, RayCastSensorCfg
+ from mjlab.tasks.velocity import mdp
+-from mjlab.tasks.velocity.mdp import UniformVelocityCommandCfg
++#from mjlab.tasks.velocity.mdp import UniformVelocityCommandCfg   #库里原始版本
++from src.tasks.velocity.mdp import UniformVelocityCommandCfg    #你自己改过的版本
++
+ from src.tasks.velocity.velocity_env_cfg import make_velocity_env_cfg
+ 
+ 
+diff --git a/src/tasks/velocity/mdp/velocity_command.py b/src/tasks/velocity/mdp/velocity_command.py
+index 54cab43..e4fb7ec 100644
+--- a/src/tasks/velocity/mdp/velocity_command.py
++++ b/src/tasks/velocity/mdp/velocity_command.py
+@@ -20,6 +20,8 @@ if TYPE_CHECKING:
+ 
+   from mjlab.envs.manager_based_rl_env import ManagerBasedRlEnv
+   from mjlab.viewer.debug_visualizer import DebugVisualizer
++  
++#测评模式twist_term.set_eval_command(cmd_tensor)
+ 
+ 
+ class UniformVelocityCommand(CommandTerm):
+@@ -50,6 +52,14 @@ class UniformVelocityCommand(CommandTerm):
+     self._joystick_enabled: viser.GuiCheckboxHandle | None = None
+     self._joystick_sliders: list[viser.GuiSliderHandle] = []
+     self._joystick_get_env_idx: Callable[[], int] | None = None
++    # Eval-only fixed command override switch.
++    # 默认关闭，因此训练时完全不受影响，仍然按原来的随机 command 逻辑运行。
++    self._eval_override_enabled = False
++    # Eval-only fixed command buffer.
++    # 用来保存“外部手动指定”的 command，shape 预期为 [num_envs, 3]，
++    # 三个维度分别对应 [vx, vy, wz]。
++    # 当该值不为 None 且开关开启时，会在 compute() 的最后覆盖 self.vel_command_b。
++    self._eval_override_command: torch.Tensor | None = None
+ 
+   @property
+   def command(self) -> torch.Tensor:
+@@ -108,6 +118,30 @@ class UniformVelocityCommand(CommandTerm):
+     standing_env_ids = self.is_standing_env.nonzero(as_tuple=False).flatten()
+     self.vel_command_b[standing_env_ids, :] = 0.0
+ 
++  def set_eval_command(self, command: torch.Tensor | None) -> None:
++      """Set or clear eval-time fixed velocity command override.
++
++      用途：
++        - 训练时不调用这个函数，环境继续按原来的随机 command 流程运行。
++        - 测试时由外部脚本在每一步传入固定 command,
++          从而实现“训练随机、评测固定”的两套模式共存。
++
++      参数:
++        command:
++          - None: 关闭 eval override,恢复原始 command 逻辑。
++          - Tensor: 启用 eval override,要求 shape 为 [num_envs, 3],
++            每一行对应一个环境的 [vx, vy, wz]。
++      """
++      if command is None:
++          # 关闭固定 command 覆盖，恢复默认随机/heading/standing 逻辑。
++          self._eval_override_enabled = False
++          self._eval_override_command = None
++      else:
++          # 开启固定 command 覆盖。
++          # 这里将输入 tensor 移到当前 device，避免后面在 compute() 中发生设备不一致错误。
++          self._eval_override_enabled = True
++          self._eval_override_command = command.to(self.device)
++
+   # GUI.
+ 
+   def create_gui(
+@@ -174,6 +208,18 @@ class UniformVelocityCommand(CommandTerm):
+       for i, s in enumerate(self._joystick_sliders):
+         self.vel_command_b[idx, i] = s.value
+ 
++    # 如果开启了 eval 固定 command 模式，则在所有原始逻辑执行完之后，
++    # 直接用外部提供的 command 覆盖当前 vel_command_b。
++    #
++    # 这样设计的目的：
++    # - 训练时：不开启 override，原逻辑完全保持不变。
++    # - 测试时：开启 override，用 JSON/脚本指定的固定 command 替换随机 command。
++    #
++    # 由于 observation 和 reward 最终读的都是 self.vel_command_b，
++    # 所以这里覆盖后，policy 看到的命令和 reward 对比使用的命令
++    # 都会自动变成你设定的固定 command。  
++    if self._eval_override_enabled and self._eval_override_command is not None:
++        self.vel_command_b[:, :] = self._eval_override_command
+   # Visualization.
+ 
+   def _debug_vis_impl(self, visualizer: "DebugVisualizer") -> None:
+diff --git a/src/tasks/velocity/velocity_env_cfg.py b/src/tasks/velocity/velocity_env_cfg.py
+index 75d635e..214a35b 100644
+--- a/src/tasks/velocity/velocity_env_cfg.py
++++ b/src/tasks/velocity/velocity_env_cfg.py
+@@ -3,7 +3,6 @@
+ This module provides a factory function to create a base velocity task config.
+ Robot-specific configurations call the factory and customize as needed.
+ """
+-
+ import math
+ from dataclasses import replace
+ 
+@@ -24,7 +23,8 @@ from mjlab.scene import SceneCfg
+ from mjlab.sensor import GridPatternCfg, ObjRef, RayCastSensorCfg
+ from mjlab.sim import MujocoCfg, SimulationCfg
+ from mjlab.tasks.velocity import mdp
+-from mjlab.tasks.velocity.mdp import UniformVelocityCommandCfg
++#from mjlab.tasks.velocity.mdp import UniformVelocityCommandCfg   #库里原始版本
++from src.tasks.velocity.mdp import UniformVelocityCommandCfg    #你自己改过的版本
+ from mjlab.terrains import TerrainEntityCfg
+ from mjlab.terrains.config import ROUGH_TERRAINS_CFG
+ from mjlab.utils.noise import UniformNoiseCfg as Unoise
+@@ -65,7 +65,7 @@ def make_velocity_env_cfg() -> ManagerBasedRlEnvCfg:
+       func=mdp.projected_gravity,
+       noise=Unoise(n_min=-0.05, n_max=0.05),
+     ),
+-    "command": ObservationTermCfg(
++    "command": ObservationTermCfg(   #环境里有个叫 twist 的 commandobservation 会把这个 twist 取出来喂给 policy
+       func=mdp.generated_commands,
+       params={"command_name": "twist"},
+     ),
+@@ -260,7 +260,7 @@ def make_velocity_env_cfg() -> ManagerBasedRlEnvCfg:
+   ##
+ 
+   rewards = {
+-    "track_linear_velocity": RewardTermCfg(
++    "track_linear_velocity": RewardTermCfg(    #环境随机生成 twist twist 进入 observation policy 输出动作机器人跑起来 reward 根据“真实速度和 twist 的差距”来算
+       func=mdp.track_linear_velocity,
+       weight=1.0,
+       params={"command_name": "twist", "std": math.sqrt(0.25)},

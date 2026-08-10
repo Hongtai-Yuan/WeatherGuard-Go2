@@ -1,0 +1,59 @@
+{
+  "episodes": {
+    "hold_zero": {
+      "segments": [
+        { "duration": 2.0, "vx": 0.0, "vy": 0.0, "wz": 0.0 }
+      ]
+    },
+    "step_vx_03": {
+      "segments": [
+        { "duration": 2.0, "vx": 0.0, "vy": 0.0, "wz": 0.0 },
+        { "duration": 4.0, "vx": 0.3, "vy": 0.0, "wz": 0.0 }
+      ]
+    },
+    "step_vx_06": {
+      "segments": [
+        { "duration": 2.0, "vx": 0.0, "vy": 0.0, "wz": 0.0 },
+        { "duration": 4.0, "vx": 0.6, "vy": 0.0, "wz": 0.0 }
+      ]
+    },
+    "step_vx_09": {
+      "segments": [
+        { "duration": 2.0, "vx": 0.0, "vy": 0.0, "wz": 0.0 },
+        { "duration": 4.0, "vx": 0.9, "vy": 0.0, "wz": 0.0 }
+      ]
+    },
+    "step_wz_03": {
+      "segments": [
+        { "duration": 2.0, "vx": 0.0, "vy": 0.0, "wz": 0.0 },
+        { "duration": 4.0, "vx": 0.0, "vy": 0.0, "wz": 0.3 }
+      ]
+    },
+    "step_wz_06": {
+      "segments": [
+        { "duration": 2.0, "vx": 0.0, "vy": 0.0, "wz": 0.0 },
+        { "duration": 4.0, "vx": 0.0, "vy": 0.0, "wz": 0.6 }
+      ]
+    },
+    "step_wz_09": {
+      "segments": [
+        { "duration": 2.0, "vx": 0.0, "vy": 0.0, "wz": 0.0 },
+        { "duration": 4.0, "vx": 0.0, "vy": 0.0, "wz": 0.9 }
+      ]
+    },
+    "step_lwz_rwz": {
+      "segments": [
+        { "duration": 2.0, "vx": 0.0, "vy": 0.0, "wz": 0.0 },
+        { "duration": 3.0, "vx": 1.0, "vy": 0.0, "wz": 1.8 },
+        { "duration": 3.0, "vx": 1.0, "vy": 0.0, "wz": -1.8 }
+      ]
+    },
+    "switch_vx_wz": {
+      "segments": [
+        { "duration": 2.0, "vx": 0.0, "vy": 0.0, "wz": 0.0 },
+        { "duration": 3.0, "vx": 0.6, "vy": 0.0, "wz": 0.0 },
+        { "duration": 3.0, "vx": 0.4, "vy": 0.0, "wz": 0.9 }
+      ]
+    }
+  }
+}

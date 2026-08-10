@@ -1,0 +1,48 @@
+defaults:
+  - _self_
+
+num_envs: 1
+freq: 50                 # can only be divisible by 200-->(1,2,4,5,8,10,20,25,40,50,100,200)
+camera_follow: True      #camera automatically adjusts to robot movement
+env_name: obstacle     # nav_demo, obstacle, warehouse, hospital, office, rivermark, terrain
+robot: go2 # go2, spot
+
+locomotion:
+  controller: mujoco_onnx # mujoco_onnx, rsl_flat
+  policy: /home/yuan/WeatherGuard-Go2/unitree_rl_mjlab/logs/rsl_rl/go2_velocity/2026-08-09_23-20-22/policy.onnx
+  sysid_params_json: outputs/sysid_fast_phase/isaac_sysid_new_trained_policy.json
+  ground_friction: 0.6
+  policy_command_scale: 1.0
+  policy_phase_period: 0.30
+
+
+sensor:
+  enable_lidar: True
+  lidar_backend: geometry # geometry, rtx
+  geometry_range: 8.0
+  geometry_points: 2500
+  geometry_obstacles: True
+  enable_camera: True
+  color_image: True
+  depth_image: True
+  semantic_segmentation: True
+
+ros:
+  enable: True
+  use_sim_time: False
+
+weather:
+  enabled: True
+  preset: medium_fog # clear, mist, light_fog, medium_fog, heavy_fog, dense_fog, extreme_fog
+  alpha: null
+  min_friction: 0.2
+  intensity: 120.0
+  max_points: 60000
+  publish_raw: True
+  fog_repo: /home/yuan/WeatherGuard-Go2/LiDAR_fog_sim
+
+sim_app:
+  anti_aliasing: 0
+  width: 1280
+  height: 720
+  hide_ui: False
