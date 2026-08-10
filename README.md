@@ -1,5 +1,7 @@
 # WeatherGuard-Go2
 
+[English](README.md) | [中文](README_zh.md)
+
 WeatherGuard-Go2 is a Unitree Go2 robust autonomous navigation simulation project for adverse weather and slippery terrain. It studies a coupled problem in legged robot navigation: wet, icy, or low-friction ground reduces locomotion stability, while fog and rain degrade LiDAR perception through sparse returns, range noise, false echoes, and outliers.
 
 The project integrates low-friction reinforcement learning locomotion, MuJoCo-to-Isaac sim2sim transfer, real-time LiDAR fog degradation, confidence-aware elevation mapping, and ROS2/Nav2 navigation validation.
