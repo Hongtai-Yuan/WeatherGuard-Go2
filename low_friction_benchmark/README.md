@@ -34,7 +34,7 @@ In these conditions, robots easily slip and lose balance.
 
 | Baseline Policy | Robust Policy (Slippery-Trained) |
 |----------------|----------------------------------|
-| ![](base4800flat.gif) | ![](slippery1.0flat.gif) |
+| ![Baseline policy on flat terrain](media/base4800flat.gif) | ![Robust policy on flat terrain](media/slippery1.0flat.gif) |
 
 👉 Both policies perform well on flat terrain.
 
@@ -44,16 +44,23 @@ In these conditions, robots easily slip and lose balance.
 
 | Baseline Policy | Robust Policy (Slippery-Trained) |
 |----------------|----------------------------------|
-| ![](baselineslippery1.8.gif) | ![](slippery1.0slippery1.8.gif) |
+| ![Baseline policy on slippery terrain at angular speed 1.8](media/baselineslippery1.8.gif) | ![Robust policy on slippery terrain at angular speed 1.8](media/slippery1.0slippery1.8.gif) |
 
 
 ### 🧊 Slippery Terrain (Low Friction μ ≈ 0.1–0.2) (angular speed=2.2)
 
 | Baseline Policy | Robust Policy (Slippery-Trained) |
 |----------------|----------------------------------|
-| ![](baseline4800slippery2.2.gif) | ![](slippery1.0slippery2.2.gif) |
+| ![Baseline policy on slippery terrain at angular speed 2.2](media/baseline4800slippery2.2.gif) | ![Robust policy on slippery terrain at angular speed 2.2](media/slippery1.0slippery2.2.gif) |
 
 👉 Baseline becomes unstable, while the robust policy maintains balance and tracking performance.
+
+### Additional Slippery-Terrain Recordings
+
+| Baseline Policy | Robust Policy (Slippery-Trained) |
+|----------------|----------------------------------|
+| ![Additional baseline slippery-terrain recording](media/baseline4800slippery.gif) | ![Additional robust slippery-terrain recording](media/slippery1.0slippery.gif) |
+
 ### Result
 
 | Scenario | Outcome |
@@ -250,4 +257,3 @@ CUDA_VISIBLE_DEVICES=0 python scripts/train.py Unitree-Go2-Slippery-Train \
 baseline instruction：
 
 Use the official default settings, with the number of parallel environments chosen according to your available resources.
-
